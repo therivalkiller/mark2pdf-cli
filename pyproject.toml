@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "markpdf-cli"
+version = "0.1.0"
+description = "A fast, clean CLI tool to convert Markdown files into beautifully styled PDFs."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Amritanshu", email = "amritanshu3011@gmail.com"},
+]
+keywords = ["markdown", "pdf", "converter", "cli", "weasyprint"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Topic :: Printing",
+]
+dependencies = [
+    "markdown>=3.5",
+    "weasyprint>=60.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/therivalkiller/markpdf-cli"
+Repository = "https://github.com/therivalkiller/markpdf-cli"
+Issues = "https://github.com/therivalkiller/markpdf-cli/issues"
+
+[project.scripts]
+markpdf = "markpdf.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
