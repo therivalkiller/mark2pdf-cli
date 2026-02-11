@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "markpdf-cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "A fast, clean CLI tool to convert Markdown files into beautifully styled PDFs."
 readme = "README.md"
 license = {text = "MIT"}

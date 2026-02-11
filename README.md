@@ -1,40 +1,37 @@
-# markpdf-cli
-
-A fast, clean CLI tool to convert **Markdown** files into beautifully styled **PDFs**.
-
-Built with [`markdown`](https://python-markdown.github.io/) and [`WeasyPrint`](https://weasyprint.readthedocs.io/).
-
----
-
-## ✨ Features
-
-- 📄 Convert one or many `.md` files to PDF in one command.
-- 🔀 **Merge mode** — combine multiple Markdown files into a single PDF with page breaks.
-- 🎨 Professional, print-ready CSS styling out of the box.
-- 📦 Installable as a Python package; works as a `markpdf` command.
+<p align="center">
+  <h1 align="center">📄 markpdf-cli</h1>
+  <p align="center">
+    <strong>Convert Markdown to beautifully styled PDFs — from the terminal.</strong>
+  </p>
+  <p align="center">
+    <a href="https://pypi.org/project/markpdf-cli/"><img src="https://img.shields.io/pypi/v/markpdf-cli?color=blue&label=PyPI" alt="PyPI"></a>
+    <a href="https://pypi.org/project/markpdf-cli/"><img src="https://img.shields.io/pypi/pyversions/markpdf-cli" alt="Python"></a>
+    <a href="https://github.com/therivalkiller/markpdf-cli/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
+  </p>
+</p>
 
 ---
 
-## 📋 Prerequisites
+**markpdf-cli** is a lightweight command-line tool that takes your `.md` files and produces clean, print-ready PDF documents with professional styling — no configuration needed.
 
-WeasyPrint depends on system libraries. On **Ubuntu / Debian**, install them first:
+Built with [`python-markdown`](https://python-markdown.github.io/) for parsing and [`WeasyPrint`](https://weasyprint.readthedocs.io/) for rendering.
 
-```bash
-sudo apt update
-sudo apt install -y libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev libcairo2
-```
+---
 
-On **macOS** (Homebrew):
+## ⚡ Quick Start
 
 ```bash
-brew install pango libffi
+pip install markpdf-cli
+markpdf README.md
 ```
+
+That's it. You now have a `README.pdf` with beautiful typography and styling.
 
 ---
 
 ## 🚀 Installation
 
-### From PyPI (once published)
+### From PyPI
 
 ```bash
 pip install markpdf-cli
@@ -43,16 +40,33 @@ pip install markpdf-cli
 ### From source
 
 ```bash
-git clone https://github.com/amritanshu/markpdf-cli.git
+git clone https://github.com/therivalkiller/markpdf-cli.git
 cd markpdf-cli
 pip install .
 ```
 
-### Development install
+### System dependencies
+
+WeasyPrint requires some system libraries. Install them **before** using markpdf:
+
+<details>
+<summary><strong>Ubuntu / Debian</strong></summary>
 
 ```bash
-pip install -e .
+sudo apt update
+sudo apt install -y libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev libcairo2
 ```
+
+</details>
+
+<details>
+<summary><strong>macOS (Homebrew)</strong></summary>
+
+```bash
+brew install pango libffi
+```
+
+</details>
 
 ---
 
@@ -61,83 +75,84 @@ pip install -e .
 ### Convert a single file
 
 ```bash
-markpdf README.md
-# → produces README.pdf
+markpdf report.md
+# → report.pdf
 ```
 
-### Convert a single file with a custom output name
+### Custom output name
 
 ```bash
-markpdf README.md -o documentation.pdf
-# → produces documentation.pdf
+markpdf report.md -o final-report.pdf
+# → final-report.pdf
 ```
 
 ### Convert multiple files (separate PDFs)
 
 ```bash
-markpdf chapter1.md chapter2.md chapter3.md
-# → produces chapter1.pdf, chapter2.pdf, chapter3.pdf
+markpdf ch1.md ch2.md ch3.md
+# → ch1.pdf  ch2.pdf  ch3.pdf
 ```
 
 ### Merge multiple files into one PDF
 
 ```bash
-markpdf chapter1.md chapter2.md chapter3.md --merge
-# → produces merged_output.pdf
+markpdf ch1.md ch2.md ch3.md --merge
+# → merged_output.pdf  (page breaks between each file)
 ```
 
-### Merge with a custom output name
+### Merge with a custom name
 
 ```bash
-markpdf chapter1.md chapter2.md chapter3.md -m -o book.pdf
-# → produces book.pdf
-```
-
-### Show version
-
-```bash
-markpdf --version
+markpdf ch1.md ch2.md ch3.md -m -o book.pdf
+# → book.pdf
 ```
 
 ---
 
-## 🏗️ Publishing to PyPI
+## 🐍 Use as a Python library
 
-### 1. Build the package
+You can also import `markpdf` directly in your scripts:
 
-```bash
-pip install build
-python -m build
+```python
+from markpdf.converter import convert_single, convert_merged
+
+# Single file
+convert_single("notes.md", "notes.pdf")
+
+# Merge multiple files
+convert_merged(["ch1.md", "ch2.md", "ch3.md"], "book.pdf")
 ```
 
-This creates `dist/markpdf_cli-0.1.0.tar.gz` and `dist/markpdf_cli-0.1.0-py3-none-any.whl`.
+---
 
-### 2. Upload to TestPyPI
+## 🏗️ Project Structure
 
-```bash
-pip install twine
-twine upload --repository testpypi dist/*
+```
+markpdf-cli/
+├── pyproject.toml          # Build config & metadata
+├── README.md
+├── .gitignore
+└── src/
+    └── markpdf/
+        ├── __init__.py     # Version
+        ├── cli.py          # CLI entry point (argparse)
+        └── converter.py    # Core MD → HTML → PDF logic
 ```
 
-You'll need an API token from [TestPyPI](https://test.pypi.org/manage/account/#api-tokens).
+---
 
-### 3. Verify from TestPyPI
+## 🤝 Contributing
 
-```bash
-python -m venv /tmp/test-markpdf && source /tmp/test-markpdf/bin/activate
-pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ markpdf-cli
-markpdf --version
-deactivate
-```
-
-### 4. Upload to production PyPI
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ```bash
-twine upload dist/*
+git clone https://github.com/therivalkiller/markpdf-cli.git
+cd markpdf-cli
+pip install -e .
 ```
 
 ---
 
 ## 📄 License
 
-MIT
+MIT © [Amritanshu](https://github.com/therivalkiller)

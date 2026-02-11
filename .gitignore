@@ -33,3 +33,4 @@ htmlcov/
 
 # Generated PDFs (optional — remove if you want to track them)
 *.pdf
+token.txt
