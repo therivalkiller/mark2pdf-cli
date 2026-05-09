@@ -12,7 +12,7 @@
 
 ---
 
-**markpdf-cli** is a lightweight command-line tool that takes your `.md` files and produces clean, print-ready PDF documents with professional styling — no configuration needed.
+**markpdf-cli** is a lightweight command-line tool that takes your `.md` files and produces clean, print-ready PDF documents with professional styling — no configuration needed..
 
 Built with [`python-markdown`](https://python-markdown.github.io/) for parsing and [`WeasyPrint`](https://weasyprint.readthedocs.io/) for rendering.
 
